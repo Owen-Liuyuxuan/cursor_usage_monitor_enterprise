@@ -31,28 +31,39 @@ the access token over D-Bus.
 
 ## Install on Ubuntu 22.04 / GNOME 42
 
-Password-free per-user installation (recommended):
+Download and install the latest prebuilt Debian package (recommended; no
+source checkout or build tools required):
 
 ```bash
-./packaging/install_user.sh
-```
-
-Reload GNOME Shell (`Alt+F2`, `r`, Enter on X11), then run
-`gnome-extensions enable cursor-usage-supervisor@owen.local` if the installer
-could not enable it in the current Shell session.
-
-Or install the Debian package system-wide:
-
-```bash
-./packaging/build_deb.sh
-sudo apt install ./dist/cursor-usage-supervisor_0.1.1_all.deb
+curl -fL \
+  -o /tmp/cursor-usage-supervisor.deb \
+  https://github.com/Owen-Liuyuxuan/cursor_usage_monitor_enterprise/releases/latest/download/cursor-usage-supervisor_0.1.1_all.deb
+sudo apt install /tmp/cursor-usage-supervisor.deb
 systemctl --user daemon-reload
 systemctl --user restart cursor-usage-supervisor.service
 gnome-extensions enable cursor-usage-supervisor@owen.local
 ```
 
+You can also download the `.deb` from the
+[Releases page](https://github.com/Owen-Liuyuxuan/cursor_usage_monitor_enterprise/releases)
+and install it with `sudo apt install ./cursor-usage-supervisor_0.1.1_all.deb`.
+APT installs the required GNOME and Python runtime dependencies automatically.
+
+For a password-free installation from a source checkout instead:
+
+```bash
+git clone https://github.com/Owen-Liuyuxuan/cursor_usage_monitor_enterprise.git
+cd cursor_usage_monitor_enterprise
+./packaging/install_user.sh
+```
+
 On X11, reload GNOME Shell with `Alt+F2`, `r`, Enter if the new indicator does
-not appear. Logging out and in also reloads extensions.
+not appear. On Wayland, log out and back in. If the installer could not enable
+the extension in the current Shell session, run
+`gnome-extensions enable cursor-usage-supervisor@owen.local` after logging in.
+
+To build the Debian package yourself, run `./packaging/build_deb.sh` from a
+source checkout; the result is written under `dist/`.
 
 ## Diagnostics
 
