@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Cursor Usage Supervisor
+Comment=Configure the Cursor usage panel monitor
+Exec=cursor-usage-supervisor-preferences
+Icon=cursor-usage-supervisor
+Categories=Utility;Settings;
+Terminal=false

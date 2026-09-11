@@ -1,0 +1,33 @@
+.cursor-panel-box { spacing: 6px; }
+.cursor-panel-icon { color: #62d9a2; }
+.cursor-warning { color: #ffb86b; }
+.cursor-critical { color: #ff7188; }
+.cursor-popover { width: 320px; padding: 8px 10px 4px; spacing: 8px; }
+.cursor-header { padding-bottom: 8px; }
+.cursor-wordmark,
+.cursor-section-label { font-size: 0.78em; font-weight: 700; letter-spacing: 1px; color: #62d9a2; }
+.cursor-live { font-size: 0.72em; font-weight: 700; color: #62d9a2; }
+.cursor-stale { color: #ffb86b; }
+.cursor-offline { color: #ff7188; }
+.cursor-hero-value { font-size: 2.35em; font-weight: 700; padding-top: 2px; }
+.cursor-caption,
+.cursor-reset,
+.cursor-account,
+.cursor-error-detail { color: #9ca3b5; }
+.cursor-caption { font-size: 0.9em; padding-bottom: 5px; }
+.cursor-reset,
+.cursor-account,
+.cursor-error-detail { font-size: 0.82em; }
+.cursor-error-detail { color: #ffb86b; }
+.cursor-progress-track { width: 320px; height: 5px; background-color: rgba(156, 163, 181, 0.22); border-radius: 3px; }
+.cursor-progress-fill { height: 5px; border-radius: 3px; }
+.cursor-progress-primary { background-color: #62d9a2; }
+.cursor-progress-allowance { background-color: #9b87f5; }
+.cursor-pool-row { padding-top: 6px; }
+.cursor-pool-value { font-weight: 600; }
+.cursor-contract { color: #9ca3b5; font-size: 0.82em; }
+.cursor-divider { height: 1px; margin: 10px 0 8px; background-color: rgba(156, 163, 181, 0.18); }
+.cursor-stats { padding: 5px 0 6px; }
+.cursor-stat { spacing: 2px; }
+.cursor-stat-value { font-size: 1.08em; font-weight: 650; }
+.cursor-stat-label { font-size: 0.66em; color: #9ca3b5; }

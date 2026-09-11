@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=io.github.owen.CursorUsageSupervisor
+Exec=/usr/bin/cursor-usage-supervisor-service
+SystemdService=cursor-usage-supervisor.service

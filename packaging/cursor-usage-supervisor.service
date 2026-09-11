@@ -1,0 +1,9 @@
+[Unit]
+Description=Cursor account usage service
+
+[Service]
+Type=dbus
+BusName=io.github.owen.CursorUsageSupervisor
+ExecStart=/usr/bin/cursor-usage-supervisor-service
+Restart=on-failure
+RestartSec=2

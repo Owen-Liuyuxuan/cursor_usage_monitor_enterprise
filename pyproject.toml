@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cursor-usage-supervisor"
+version = "0.1.1"
+description = "A GNOME panel monitor for Cursor account usage."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Owen"}]
+dependencies = []
+
+[project.scripts]
+cursor-usage-supervisor = "cursor_usage_supervisor.preferences:main"
+cursor-usage-supervisor-service = "cursor_usage_supervisor.service:main"
+cursor-usage-supervisor-preferences = "cursor_usage_supervisor.preferences:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
