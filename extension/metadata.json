@@ -2,6 +2,6 @@
   "uuid": "cursor-usage-supervisor@owen.local",
   "name": "Cursor Usage Supervisor",
   "description": "Cursor billing-cycle usage in the GNOME top panel.",
-  "version": 2,
+  "version": 3,
   "shell-version": ["42"]
 }

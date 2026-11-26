@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Unlock Cursor 3.27+ `cursor-safe-storage:v1` access tokens on Ubuntu /
+  GNOME via libsecret and Chromium OSCrypt, then query usage as before.
+
 ## 0.1.1
 
 - Correct older Team-contract rendering: show one included allowance instead

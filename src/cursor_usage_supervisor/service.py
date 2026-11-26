@@ -15,7 +15,8 @@ gi.require_version("Gio", "2.0")
 gi.require_version("GLib", "2.0")
 from gi.repository import Gio, GLib  # noqa: E402
 
-from .client import CursorUsageError, collect_usage
+from .client import collect_usage
+from .errors import CursorUsageError
 from .config import Settings
 
 BUS_NAME = "io.github.owen.CursorUsageSupervisor"

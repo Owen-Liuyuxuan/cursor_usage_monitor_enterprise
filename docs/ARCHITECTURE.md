@@ -62,7 +62,13 @@ zero usage.
 
 ## Failure behavior
 
+- Cursor 3.27+ may seal `cursorAuth/accessToken` with Electron safeStorage.
+  The Linux service unwraps Chromium `v10`/`v11` OSCrypt blobs using the
+  GNOME Keyring item for application `Cursor`, then treats the plaintext as
+  the previous JWT session cookie.
 - An expired login asks the user to sign in again in Cursor Desktop.
+- A sealed login whose keyring entry is missing or cannot be decrypted is an
+  explicit error, not a zero-usage display.
 - Network/schema errors never include response bodies or credentials.
 - After a successful fetch, transient failures retain the last good snapshot
   and visibly mark it `STALE`.

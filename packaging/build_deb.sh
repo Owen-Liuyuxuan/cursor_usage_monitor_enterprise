@@ -55,7 +55,7 @@ Version: ${version}
 Section: utils
 Priority: optional
 Architecture: all
-Depends: python3 (>= 3.10), python3-gi, gir1.2-gtk-4.0, gir1.2-adw-1, gnome-shell (>= 42)
+Depends: python3 (>= 3.10), python3-gi, python3-cryptography, gir1.2-gtk-4.0, gir1.2-adw-1, gir1.2-secret-1, gnome-shell (>= 42)
 Maintainer: Owen
 Description: GNOME top-panel monitor for Cursor account usage
  Displays Cursor billing-cycle allowance, usage pools, bonus usage, and

@@ -25,9 +25,11 @@ admins can instead build an organization-wide integration on Cursor's official
 [Admin API](https://cursor.com/docs/account/teams/admin-api); this personal
 panel deliberately requires no Admin API key.
 
-The service re-reads the database at every refresh. It never reads the refresh
-token, never writes Cursor's database, never logs credentials, and never sends
-the access token over D-Bus.
+The service re-reads the database at every refresh. Cursor 3.27+ may store the
+access token as an Electron `cursor-safe-storage:v1` envelope; on Ubuntu the
+service unwraps it with the GNOME Keyring password for application `Cursor`.
+It never reads the refresh token, never writes Cursor's database, never logs
+credentials, and never sends the access token over D-Bus.
 
 ## Install on Ubuntu 22.04 / GNOME 42
 
@@ -37,7 +39,7 @@ source checkout or build tools required):
 ```bash
 curl -fL \
   -o /tmp/cursor-usage-supervisor.deb \
-  https://github.com/Owen-Liuyuxuan/cursor_usage_monitor_enterprise/releases/latest/download/cursor-usage-supervisor_0.1.1_all.deb
+  https://github.com/Owen-Liuyuxuan/cursor_usage_monitor_enterprise/releases/latest/download/cursor-usage-supervisor_0.1.2_all.deb
 sudo apt install /tmp/cursor-usage-supervisor.deb
 systemctl --user daemon-reload
 systemctl --user restart cursor-usage-supervisor.service
@@ -46,7 +48,7 @@ gnome-extensions enable cursor-usage-supervisor@owen.local
 
 You can also download the `.deb` from the
 [Releases page](https://github.com/Owen-Liuyuxuan/cursor_usage_monitor_enterprise/releases)
-and install it with `sudo apt install ./cursor-usage-supervisor_0.1.1_all.deb`.
+and install it with `sudo apt install ./cursor-usage-supervisor_0.1.2_all.deb`.
 APT installs the required GNOME and Python runtime dependencies automatically.
 
 For a password-free installation from a source checkout instead:

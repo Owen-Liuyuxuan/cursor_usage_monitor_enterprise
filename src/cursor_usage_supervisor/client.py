@@ -18,13 +18,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable
 
+from .errors import CursorUsageError
+from .safe_storage import unseal_access_token
+
 SUMMARY_URL = "https://cursor.com/api/usage-summary"
 LEGACY_URL = "https://cursor.com/api/usage?user={user_id}"
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
-
-
-class CursorUsageError(RuntimeError):
-    """A safe-to-display collection failure with no credential material."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,6 +70,12 @@ def read_cursor_session(database: Path) -> CursorSession:
     token = rows.get("cursorAuth/accessToken")
     if not token:
         raise CursorUsageError("Cursor Desktop is not signed in")
+    if isinstance(token, bytes):
+        try:
+            token = token.decode("utf-8")
+        except UnicodeDecodeError as error:
+            raise CursorUsageError("Cursor access token has an unrecognized format") from error
+    token = unseal_access_token(token)
     team_name = None
     try:
         team_name = json.loads(rows.get("cursorAuth/cachedTeam", "{}")).get("name")

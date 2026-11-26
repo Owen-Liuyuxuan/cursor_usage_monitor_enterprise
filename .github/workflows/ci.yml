@@ -12,7 +12,7 @@ jobs:
       - name: Install GNOME Python runtime
         run: |
           sudo apt-get update
-          sudo apt-get install --yes python3-gi
+          sudo apt-get install --yes python3-gi python3-cryptography gir1.2-secret-1
       - name: Run unit tests
         run: PYTHONPATH=src /usr/bin/python3 -m unittest discover -s tests -v
       - run: bash -n packaging/build_deb.sh

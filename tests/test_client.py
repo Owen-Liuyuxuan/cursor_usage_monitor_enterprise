@@ -6,14 +6,18 @@ import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
+
+from test_safe_storage import seal_token
 
 from cursor_usage_supervisor.client import (
     CursorSession,
-    CursorUsageError,
     fetch_raw_usage,
     normalize_usage,
     read_cursor_session,
 )
+from cursor_usage_supervisor.errors import CursorUsageError
+from cursor_usage_supervisor.safe_storage import SEALED_PREFIX
 
 
 def fake_jwt(subject: str = "auth0|user_test") -> str:
@@ -42,6 +46,28 @@ class CursorSessionTest(unittest.TestCase):
             self.assertEqual(session.membership_type, "enterprise")
             self.assertEqual(session.team_name, "Example Team")
             self.assertNotIn("refresh", repr(session).lower())
+
+    def test_unseals_safe_storage_access_token(self) -> None:
+        password = "unit-test-password"
+        with tempfile.TemporaryDirectory() as directory:
+            database = Path(directory) / "state.vscdb"
+            connection = sqlite3.connect(database)
+            connection.execute("CREATE TABLE ItemTable (key TEXT PRIMARY KEY, value TEXT)")
+            connection.execute(
+                "INSERT INTO ItemTable VALUES (?, ?)",
+                ("cursorAuth/accessToken", seal_token(fake_jwt(), password)),
+            )
+            connection.commit()
+            connection.close()
+
+            with patch(
+                "cursor_usage_supervisor.safe_storage.lookup_linux_os_crypt_password",
+                return_value=password,
+            ):
+                session = read_cursor_session(database)
+
+            self.assertEqual(session.user_id, "user_test")
+            self.assertFalse(session.access_token.startswith(SEALED_PREFIX))
 
     def test_missing_database_is_safe_error(self) -> None:
         with self.assertRaisesRegex(CursorUsageError, "not found"):
